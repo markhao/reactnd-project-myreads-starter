@@ -5,12 +5,14 @@ import Book from './objects/Book.js'
 class Bookshelf extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    shelves: PropTypes.object.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
   }
 
 
   render () {
-    const { title, books } = this.props;
+    const { title, books, shelves, onChangeShelf } = this.props;
 
     return (
       <div className="bookshelf">
@@ -18,7 +20,11 @@ class Bookshelf extends React.Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {books.map(book => (
-              <li key={book.id}><Book book={book}/></li>
+              <li key={book.id}><Book
+                  book={book}
+                  shelves={shelves}
+                  onChangeShelf={onChangeShelf}
+              /></li>
             ))
             }
           </ol>
