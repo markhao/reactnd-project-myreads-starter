@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Selector from '../Selector'
+import Selector from './Selector'
 
 class Book extends React.Component {
   static propTypes = {
