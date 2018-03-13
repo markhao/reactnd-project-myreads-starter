@@ -1,15 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Bookshelf from '../components/Bookshelf'
-import { Link } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import Bookshelf from "../components/Bookshelf";
+import { Link } from "react-router-dom";
 
 class BookList extends React.Component {
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+    shelves: PropTypes.object.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
+  };
 
-  render () {
+  render() {
+    const { books, shelves, onChangeShelf } = this.props;
 
-    const { books, shelves } = this.props;
-
-    return(
+    return (
       <div className="list-books">
         <div className="list-books-title">
           <h1>MyReads</h1>
@@ -17,22 +21,25 @@ class BookList extends React.Component {
         <div className="list-books-content">
           <div>
             {Object.keys(shelves).map(key => (
-              <Bookshelf key={key}
-                         title={shelves[key]}
-                         books={books.filter(book => {
-                           if (book) {
-                             return book.shelf === key;
-                           }
-                         })}
-                         shelves={shelves}
-                         onChangeShelf={this.changeBookShelf}
+              <Bookshelf
+                key={key}
+                title={shelves[key]}
+                books={books.filter(book => {
+                  if (book) {
+                    return book.shelf === key;
+                  }
+                })}
+                shelves={shelves}
+                onChangeShelf={onChangeShelf}
               />
             ))}
           </div>
         </div>
-        <Link to='/search' className="open-search">Search</Link>
+        <Link to="/search" className="open-search">
+          Search
+        </Link>
       </div>
-    )
+    );
   }
 }
 
